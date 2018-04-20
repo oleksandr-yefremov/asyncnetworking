@@ -6,9 +6,9 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.QueryMap
 
-internal interface ReposApi {
+interface RepoApi {
 
     @GET("users/{user_id}/repos")
-    fun getRepos(@Path("user_id") userId: String, @QueryMap requestMap: Map<String, String>): Call<Array<Repo>>
+    fun getRepos(@Path("user_id") userId: String, @QueryMap requestMap: Map<String, String>): Call<List<Repo>>
 
 }

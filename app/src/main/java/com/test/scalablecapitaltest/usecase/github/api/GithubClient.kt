@@ -1,16 +1,15 @@
-package com.test.scalablecapitaltest.usecase.github
+package com.test.scalablecapitaltest.usecase.github.api
 
 import com.google.gson.Gson
-import com.test.scalablecapitaltest.usecase.github.api.ReposApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class GithubClient() {
+object GithubClient {
 
     private val okHttpClient: OkHttpClient = OkHttpClient()
     private val retrofitClient: Retrofit
-    private val reposApi: ReposApi
+    private val REPO_API: RepoApi
     private val gson: Gson = Gson()
 
     private val githubApiBaseUrl = "https://api.github.com/"
@@ -23,7 +22,7 @@ class GithubClient() {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
 
-        reposApi = retrofitClient.create(ReposApi::class.java)
+        REPO_API = retrofitClient.create(RepoApi::class.java)
     }
 
 }
