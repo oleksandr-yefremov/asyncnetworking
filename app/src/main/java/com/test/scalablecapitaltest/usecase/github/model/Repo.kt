@@ -3,7 +3,7 @@ package com.test.scalablecapitaltest.usecase.github.model
 import com.google.gson.annotations.SerializedName
 
 //@Generated("com.robohorse.robopojogenerator")
-data class RepoList(
+data class Repo(
 
 	@field:SerializedName("stargazers_count")
 	val stargazersCount: Int? = null,
