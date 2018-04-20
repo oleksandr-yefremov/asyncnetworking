@@ -1,13 +1,27 @@
 package com.test.scalablecapitaltest.usecase.github.viewmodel
 
+import android.util.Log
+import com.test.scalablecapitaltest.common.Result
+import com.test.scalablecapitaltest.usecase.github.model.Repo
 import com.test.scalablecapitaltest.usecase.github.repository.RepoRepository
 
-class RepoListViewModel(val repoRepository: RepoRepository) {
+class RepoListViewModel(private val repoRepository: RepoRepository) {
 
-//    fun getUsers(): Observable<UsersList> {
-//        //Prepare the data for your UI, the users list
-//        //and maybe some additional data needed as well
-//        return userRepository.getUsers()
-//                .map { UsersList(it, "Users loaded successfully!") }
-//    }
+    fun getRepoList(result: Result<RepoList>) {
+        return repoRepository.getRepos(object : Result<List<Repo>> {
+            override fun onFailure(error: Throwable) {
+                result.onFailure(error)
+            }
+
+            override fun onSuccess(data: List<Repo>) {
+                Log.d(TAG, "getRepoList: $data")
+                result.onSuccess()
+            }
+
+        })
+    }
+
+    companion object {
+        const val TAG = "RepoListViewModel"
+    }
 }
