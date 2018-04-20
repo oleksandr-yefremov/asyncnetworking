@@ -7,7 +7,7 @@ import com.test.scalablecapitaltest.usecase.github.repository.RepoRepository
 
 class RepoListViewModel(private val repoRepository: RepoRepository) {
 
-    fun getRepoList(result: Result<RepoList>) {
+    fun getRepoList(result: Result<List<Repo>>) {
         return repoRepository.getRepos(object : Result<List<Repo>> {
             override fun onFailure(error: Throwable) {
                 result.onFailure(error)
@@ -15,9 +15,8 @@ class RepoListViewModel(private val repoRepository: RepoRepository) {
 
             override fun onSuccess(data: List<Repo>) {
                 Log.d(TAG, "getRepoList: $data")
-                result.onSuccess()
+                result.onSuccess(data)
             }
-
         })
     }
 

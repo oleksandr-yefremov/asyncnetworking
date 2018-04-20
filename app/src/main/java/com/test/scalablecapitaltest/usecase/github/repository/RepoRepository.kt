@@ -11,7 +11,7 @@ import retrofit2.Response
 class RepoRepository(private val repoApi: RepoApi) {
 
     fun getRepos(result: Result<List<Repo>>) {
-        return repoApi.getRepos("oleksandr-yefremov", emptyMap())
+        return repoApi.getRepos("mralexgray", emptyMap())
                 .enqueue(object : Callback<List<Repo>> {
                     override fun onResponse(call: Call<List<Repo>>, response: Response<List<Repo>>) {
                         val body = response.body()
