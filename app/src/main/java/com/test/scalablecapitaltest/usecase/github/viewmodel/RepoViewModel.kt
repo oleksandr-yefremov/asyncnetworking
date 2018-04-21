@@ -21,7 +21,7 @@ class RepoViewModel(private val repoRepository: RepoRepository, val repo: Repo) 
                 }
 
                 val lastCommit = data.first()
-                Log.d(TAG, "getRepoCommits: $lastCommit")
+                Log.d(TAG, "getRepoLastCommit: $lastCommit")
                 result.onSuccess(lastCommit)
             }
         })

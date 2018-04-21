@@ -25,8 +25,11 @@ class RepoWithCommitListAdapter(context: Context, users: ArrayList<RepoWithCommi
 
         // Populate the data into the template view using the data object
         repoNameText.text = repo.repo.name
-        repo.commit?.let {
-            commitShaText.text = it.sha
+        val commit = repo.commit
+        if (commit != null) {
+            commitShaText.text = commit.sha
+        } else {
+            commitShaText.text = ""
         }
 
 

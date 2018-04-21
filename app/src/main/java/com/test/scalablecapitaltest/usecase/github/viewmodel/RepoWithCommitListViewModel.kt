@@ -11,7 +11,7 @@ import com.test.scalablecapitaltest.usecase.github.repository.RepoRepository
 class RepoWithCommitListViewModel(private val repoRepository: RepoRepository) {
 
     private val repoListViewModel = ServiceLocator.repoListViewModel
-    var repoWithCommitViewModelList: List<RepoViewModel>? = null
+    lateinit var repoWithCommitViewModelList: ArrayList<RepoViewModel>
 
     fun getRepoList(result: Result<List<RepoWithCommit>>, repoCommitListener: RepoCommitListener) {
         return repoListViewModel.getRepoList(object : Result<List<Repo>> {
@@ -23,8 +23,12 @@ class RepoWithCommitListViewModel(private val repoRepository: RepoRepository) {
                 Log.d(RepoListViewModel.TAG, "getRepoList: $data")
 
                 val repoWithCommitList = ArrayList<RepoWithCommit>(data.size)
+                repoWithCommitViewModelList = ArrayList<RepoViewModel>(data.size)
+
                 data.forEachIndexed { index, repo ->
                     val repoViewModel = RepoViewModel(repoRepository, repo)
+                    repoWithCommitViewModelList.add(repoViewModel)
+
                     val repoWithCommit = RepoWithCommit(repo)
                     repoWithCommitList.add(repoWithCommit)
 
