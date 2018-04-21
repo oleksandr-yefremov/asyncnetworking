@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.test.scalablecapitaltest"
+        applicationId "com.test.asyncnetworking"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
@@ -27,6 +27,8 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation "android.arch.persistence.room:runtime:1.1.0-beta3"
+    kapt "android.arch.persistence.room:compiler:1.1.0-beta3"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
