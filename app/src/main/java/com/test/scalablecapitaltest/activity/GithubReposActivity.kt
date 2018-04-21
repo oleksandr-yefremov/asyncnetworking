@@ -3,7 +3,7 @@ package com.test.scalablecapitaltest.activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.test.scalablecapitaltest.R
-import com.test.scalablecapitaltest.usecase.github.view.RepoListFragment
+import com.test.scalablecapitaltest.usecase.github.view.RepoWithCommitListFragment
 
 class GithubReposActivity : AppCompatActivity() {
 
@@ -13,7 +13,7 @@ class GithubReposActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.frag_container, RepoListFragment()).commit()
+                    .replace(R.id.frag_container, RepoWithCommitListFragment()).commit()
         }
     }
 }

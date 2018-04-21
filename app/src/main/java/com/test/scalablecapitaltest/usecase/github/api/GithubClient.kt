@@ -9,7 +9,7 @@ object GithubClient {
 
     private val okHttpClient: OkHttpClient = OkHttpClient()
     private val retrofitClient: Retrofit
-    val REPO_API: RepoApi
+    val repoApi: RepoApi
     private val gson: Gson = Gson()
 
     private val githubApiBaseUrl = "https://api.github.com/"
@@ -22,7 +22,7 @@ object GithubClient {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
 
-        REPO_API = retrofitClient.create(RepoApi::class.java)
+        repoApi = retrofitClient.create(RepoApi::class.java)
     }
 
 }

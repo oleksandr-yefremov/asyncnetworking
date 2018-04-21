@@ -11,25 +11,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:text="repo_name"
+        android:text="repoNameText"
+        android:textSize="24sp"
         />
 
     <TextView
-        android:id="@+id/numLikesText"
+        android:id="@+id/commitShaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="40dp"
-        android:text="num_of_likes"
-        />
-
-    <TextView
-        android:id="@+id/numForksText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView2"
         android:layout_alignParentRight="true"
-        android:text="num_of_forks"
-        />
+        android:layout_below="@+id/repoNameText"
+        android:text="commitShaText"/>
+
 </RelativeLayout>

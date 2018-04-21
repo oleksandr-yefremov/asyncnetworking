@@ -14,7 +14,7 @@ class RepoListViewModel(private val repoRepository: RepoRepository) {
             }
 
             override fun onSuccess(data: List<Repo>) {
-                Log.d(TAG, "getRepoList: $data")
+                Log.d(TAG, "getRepoList : ${data.size}")
                 result.onSuccess(data)
             }
         })

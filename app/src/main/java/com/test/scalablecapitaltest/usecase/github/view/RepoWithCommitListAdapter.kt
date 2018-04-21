@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.test.scalablecapitaltest.R
-import com.test.scalablecapitaltest.usecase.github.model.Repo
+import com.test.scalablecapitaltest.usecase.github.data.RepoWithCommit
 
-class RepoListAdapter(context: Context, users: ArrayList<Repo>) : ArrayAdapter<Repo>(context, 0, users) {
+class RepoWithCommitListAdapter(context: Context, users: ArrayList<RepoWithCommit>) : ArrayAdapter<RepoWithCommit>(context, 0, users) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         // Prepare convertView
@@ -21,11 +21,14 @@ class RepoListAdapter(context: Context, users: ArrayList<Repo>) : ArrayAdapter<R
         // Check if an existing view is being reused, otherwise inflate the view
         // Lookup view for data population
         val repoNameText = convertView.findViewById<TextView>(R.id.repoNameText)
-        val numLikesText = convertView.findViewById<TextView>(R.id.commitShaText)
+        val commitShaText = convertView.findViewById<TextView>(R.id.commitShaText)
 
         // Populate the data into the template view using the data object
-        repoNameText.text = repo.name
-        numLikesText.text = repo.stargazersCount.toString()
+        repoNameText.text = repo.repo.name
+        repo.commit?.let {
+            commitShaText.text = it.sha
+        }
+
 
         // Return the completed view to render on screen
         return convertView
