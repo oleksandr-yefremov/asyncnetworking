@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.test.asyncnetworking.R
 import com.test.asyncnetworking.usecase.github.data.RepoWithCommit
 
-class RepoWithCommitListAdapter(context: Context, users: ArrayList<RepoWithCommit>) : ArrayAdapter<RepoWithCommit>(context, 0, users) {
+class RepoWithCommitListAdapter(context: Context, repos: ArrayList<RepoWithCommit>) : ArrayAdapter<RepoWithCommit>(context, 0, repos) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         // Prepare convertView

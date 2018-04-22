@@ -17,6 +17,7 @@ import com.test.asyncnetworking.usecase.github.viewmodel.RepoWithCommitListViewM
 class RepoWithCommitListFragment: Fragment(), RepoCommitListener {
     private lateinit var repoWithCommitListViewModel: RepoWithCommitListViewModel
     private lateinit var repoListView: ListView
+    private var repoList = ArrayList<RepoWithCommit>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val inflate = inflater.inflate(R.layout.fragment_repo_list, container, false)
@@ -27,11 +28,16 @@ class RepoWithCommitListFragment: Fragment(), RepoCommitListener {
     override fun onStart() {
         super.onStart()
 
-        repoWithCommitListViewModel = (activity?.application as Application).serviceLocator.repoWithCommitListViewModel
+        // init adapter with empty list
+        val repoWithCommitListAdapter = RepoWithCommitListAdapter(context!!, repoList)
+        repoListView.adapter = repoWithCommitListAdapter
 
+        repoWithCommitListViewModel = (activity?.application as Application).serviceLocator.repoWithCommitListViewModel
         repoWithCommitListViewModel.getRepoList(object : Result<List<RepoWithCommit>> {
             override fun onSuccess(data: List<RepoWithCommit>) {
-                repoListView.adapter = RepoWithCommitListAdapter(context!!, data as ArrayList<RepoWithCommit>)
+                repoList.clear()
+                repoList.addAll(data as ArrayList<RepoWithCommit>)
+                repoWithCommitListAdapter.notifyDataSetChanged()
             }
 
             override fun onFailure(error: Throwable) {
@@ -43,6 +49,8 @@ class RepoWithCommitListFragment: Fragment(), RepoCommitListener {
 
     override fun onCommitLoaded(index: Int) {
         Log.d(TAG, "onCommitLoaded : $index")
+
+        // TODO: notify only changed rows, not the whole dataset (e.g. by row id)
         (repoListView.adapter as RepoWithCommitListAdapter).notifyDataSetChanged()
     }
 

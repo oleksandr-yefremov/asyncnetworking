@@ -16,6 +16,8 @@ class RepoListFragment: Fragment() {
 
     private lateinit var repoListViewModel: RepoListViewModel
     private lateinit var repoListView: ListView
+    private lateinit var repoListAdapter: RepoListAdapter
+//    private var repoList = ArrayList<Repo>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val inflate = inflater.inflate(R.layout.fragment_repo_list, container, false)
@@ -27,9 +29,14 @@ class RepoListFragment: Fragment() {
         super.onStart()
 
         repoListViewModel = (activity?.application as Application).serviceLocator.repoListViewModel
+        repoListAdapter = RepoListAdapter(context!!)
+        repoListAdapter.setNotifyOnChange(true)
+        repoListView.adapter = repoListAdapter
+
         repoListViewModel.getRepoList(object : Result<List<Repo>> {
             override fun onSuccess(data: List<Repo>) {
-                repoListView.adapter = RepoListAdapter(context!!, data as ArrayList<Repo>)
+                repoListAdapter.clear()
+                repoListAdapter.addAll(data as ArrayList<Repo>)
             }
 
             override fun onFailure(error: Throwable) {

@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.test.asyncnetworking.R
 import com.test.asyncnetworking.usecase.github.model.Repo
 
-class RepoListAdapter(context: Context, users: ArrayList<Repo>) : ArrayAdapter<Repo>(context, 0, users) {
+class RepoListAdapter(context: Context) : ArrayAdapter<Repo>(context, 0) {
 
     // TODO: implement ViewHolder
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
