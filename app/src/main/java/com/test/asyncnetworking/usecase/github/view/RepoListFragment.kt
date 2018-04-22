@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import com.test.asyncnetworking.R
+import com.test.asyncnetworking.application.Application
 import com.test.asyncnetworking.common.Result
-import com.test.asyncnetworking.di.ServiceLocator
 import com.test.asyncnetworking.usecase.github.model.Repo
+import com.test.asyncnetworking.usecase.github.viewmodel.RepoListViewModel
 
 class RepoListFragment: Fragment() {
 
-    private val repoListViewModel = ServiceLocator.repoListViewModel
-    private val repoWithCommitListViewModel = ServiceLocator.repoListViewModel
+    private lateinit var repoListViewModel: RepoListViewModel
     private lateinit var repoListView: ListView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,10 +26,10 @@ class RepoListFragment: Fragment() {
     override fun onStart() {
         super.onStart()
 
+        repoListViewModel = (activity?.application as Application).serviceLocator.repoListViewModel
         repoListViewModel.getRepoList(object : Result<List<Repo>> {
             override fun onSuccess(data: List<Repo>) {
                 repoListView.adapter = RepoListAdapter(context!!, data as ArrayList<Repo>)
-//                repoListView.adapter.not
             }
 
             override fun onFailure(error: Throwable) {

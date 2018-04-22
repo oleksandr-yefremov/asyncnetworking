@@ -66,9 +66,6 @@ data class Repo(
 	@field:SerializedName("ssh_url")
 	val sshUrl: String? = null,
 
-	@field:SerializedName("license")
-	val license: Any? = null,
-
 	@field:SerializedName("full_name")
 	val fullName: String? = null,
 
@@ -156,9 +153,6 @@ data class Repo(
 	@field:SerializedName("has_pages")
 	val hasPages: Boolean? = null,
 
-	@field:SerializedName("owner")
-	val owner: Owner? = null,
-
 	@field:SerializedName("commits_url")
 	val commitsUrl: String? = null,
 
@@ -189,9 +183,6 @@ data class Repo(
 	@field:SerializedName("contents_url")
 	val contentsUrl: String? = null,
 
-	@field:SerializedName("mirror_url")
-	val mirrorUrl: Any? = null,
-
 	@field:SerializedName("milestones_url")
 	val milestonesUrl: String? = null,
 
@@ -218,9 +209,6 @@ data class Repo(
 
 	@field:SerializedName("watchers_count")
 	val watchersCount: Int? = null,
-
-	@field:SerializedName("homepage")
-	val homepage: Any? = null,
 
 	@field:SerializedName("forks_count")
 	val forksCount: Int? = null

@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/frag_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    />
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    >
+
+    <Button
+        android:id="@+id/gotoRepoListActivityButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:text="List of repositories for user 'mralexgray'"
+        />
+
+    <Button
+        android:id="@+id/gotoRepoWithCommitListActivityButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:text="List of repositories with last commit for user 'mralexgray'"
+        />
+
+</LinearLayout>

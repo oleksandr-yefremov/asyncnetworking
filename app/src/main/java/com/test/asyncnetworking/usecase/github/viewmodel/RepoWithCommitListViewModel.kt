@@ -2,15 +2,13 @@ package com.test.asyncnetworking.usecase.github.viewmodel
 
 import android.util.Log
 import com.test.asyncnetworking.common.Result
-import com.test.asyncnetworking.di.ServiceLocator
 import com.test.asyncnetworking.usecase.github.data.RepoWithCommit
 import com.test.asyncnetworking.usecase.github.model.Commit
 import com.test.asyncnetworking.usecase.github.model.Repo
 import com.test.asyncnetworking.usecase.github.repository.RepoRepository
 
-class RepoWithCommitListViewModel(private val repoRepository: RepoRepository) {
+class RepoWithCommitListViewModel(private val repoRepository: RepoRepository, private val repoListViewModel: RepoListViewModel) {
 
-    private val repoListViewModel = ServiceLocator.repoListViewModel
     lateinit var repoViewModelList: ArrayList<RepoViewModel>
 
     fun getRepoList(result: Result<List<RepoWithCommit>>, repoCommitListener: RepoCommitListener) {

@@ -8,13 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import com.test.asyncnetworking.R
+import com.test.asyncnetworking.application.Application
 import com.test.asyncnetworking.common.Result
-import com.test.asyncnetworking.di.ServiceLocator
 import com.test.asyncnetworking.usecase.github.data.RepoWithCommit
 import com.test.asyncnetworking.usecase.github.viewmodel.RepoCommitListener
+import com.test.asyncnetworking.usecase.github.viewmodel.RepoWithCommitListViewModel
 
 class RepoWithCommitListFragment: Fragment(), RepoCommitListener {
-    private val repoWithCommitListViewModel = ServiceLocator.repoWithCommitListViewModel
+    private lateinit var repoWithCommitListViewModel: RepoWithCommitListViewModel
     private lateinit var repoListView: ListView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -25,6 +26,8 @@ class RepoWithCommitListFragment: Fragment(), RepoCommitListener {
 
     override fun onStart() {
         super.onStart()
+
+        repoWithCommitListViewModel = (activity?.application as Application).serviceLocator.repoWithCommitListViewModel
 
         repoWithCommitListViewModel.getRepoList(object : Result<List<RepoWithCommit>> {
             override fun onSuccess(data: List<RepoWithCommit>) {

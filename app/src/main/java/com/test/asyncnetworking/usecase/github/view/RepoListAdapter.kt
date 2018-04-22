@@ -11,8 +11,10 @@ import com.test.asyncnetworking.usecase.github.model.Repo
 
 class RepoListAdapter(context: Context, users: ArrayList<Repo>) : ArrayAdapter<Repo>(context, 0, users) {
 
+    // TODO: implement ViewHolder
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         // Prepare convertView
+
         val convertView = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item_repo, parent, false)
 
         // Get the data item for this position
@@ -25,7 +27,8 @@ class RepoListAdapter(context: Context, users: ArrayList<Repo>) : ArrayAdapter<R
 
         // Populate the data into the template view using the data object
         repoNameText.text = repo.name
-        numLikesText.text = repo.stargazersCount.toString()
+        // TODO: implement string placeholder
+        numLikesText.text = "followers: " + repo.stargazersCount.toString()
 
         // Return the completed view to render on screen
         return convertView
