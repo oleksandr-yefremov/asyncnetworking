@@ -9,11 +9,11 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "repos")
 data class Repo(
 
-	@PrimaryKey
 	@ColumnInfo(name = "id")
 	@field:SerializedName("id")
 	val id: Int? = null,
 
+	@PrimaryKey
 	@ColumnInfo(name = "name")
 	@field:SerializedName("name")
 	val name: String,

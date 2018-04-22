@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ListView
 import com.test.asyncnetworking.R
 import com.test.asyncnetworking.application.Application
-import com.test.asyncnetworking.common.Result
+import com.test.asyncnetworking.common.CachedResult
 import com.test.asyncnetworking.usecase.github.model.Repo
 import com.test.asyncnetworking.usecase.github.viewmodel.RepoListViewModel
 import kotlinx.coroutines.experimental.android.UI
@@ -36,8 +36,8 @@ class RepoListFragment: Fragment() {
         repoListView.adapter = repoListAdapter
 
         launch(UI) {
-            repoListViewModel.getRepoList(object : Result<List<Repo>> {
-                override fun onSuccess(data: List<Repo>) {
+            repoListViewModel.getRepoList(object : CachedResult<List<Repo>> {
+                override fun onSuccess(data: List<Repo>, isCache: Boolean) {
                     repoListAdapter.clear()
                     repoListAdapter.addAll(data as ArrayList<Repo>)
                 }

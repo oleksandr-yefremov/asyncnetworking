@@ -1,6 +1,7 @@
 package com.test.asyncnetworking.usecase.github.repository
 
 import android.util.Log
+import com.test.asyncnetworking.common.CachedResult
 import com.test.asyncnetworking.common.Result
 import com.test.asyncnetworking.usecase.github.api.RepoApi
 import com.test.asyncnetworking.usecase.github.db.RepoDao
@@ -17,10 +18,10 @@ import ru.gildor.coroutines.retrofit.awaitResponse
 
 class RepoRepository(private val repoApi: RepoApi, private val repoDao: RepoDao) {
 
-    suspend fun getRepos(result: Result<List<Repo>>) {
+    suspend fun getRepos(result: CachedResult<List<Repo>>) {
         val cachedData = getReposFromDatabase().await()
         Log.d(TAG, "async getReposFromDatabase() finished")
-        result.onSuccess(cachedData)
+        result.onSuccess(cachedData, isCache = true)
 
         Log.d(TAG, Thread.currentThread().name)
         try {
@@ -35,12 +36,13 @@ class RepoRepository(private val repoApi: RepoApi, private val repoDao: RepoDao)
 
             if (data != null) {
                 storeReposInDatabase(data)
-                result.onSuccess(data)
+                result.onSuccess(data, isCache = false)
             } else {
-                result.onSuccess(emptyList())
+                result.onSuccess(emptyList(), isCache = false)
             }
         } catch (error: Throwable) {
             Log.d(TAG, "repoApi.getRepos.onResponse $error")
+            result.onFailure(error)
         }
     }
 
