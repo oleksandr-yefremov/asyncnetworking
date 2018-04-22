@@ -11,7 +11,7 @@ class RepoWithCommitListViewModel(private val repoRepository: RepoRepository, pr
 
     lateinit var repoViewModelList: ArrayList<RepoViewModel>
 
-    fun getRepoList(result: Result<List<RepoWithCommit>>, repoCommitListener: RepoCommitListener) {
+    suspend fun getRepoList(result: Result<List<RepoWithCommit>>, repoCommitListener: RepoCommitListener) {
         return repoListViewModel.getRepoList(object : Result<List<Repo>> {
             override fun onFailure(error: Throwable) {
                 result.onFailure(error)

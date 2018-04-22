@@ -13,6 +13,7 @@ import com.test.asyncnetworking.common.Result
 import com.test.asyncnetworking.usecase.github.data.RepoWithCommit
 import com.test.asyncnetworking.usecase.github.viewmodel.RepoCommitListener
 import com.test.asyncnetworking.usecase.github.viewmodel.RepoWithCommitListViewModel
+import kotlinx.coroutines.experimental.launch
 
 class RepoWithCommitListFragment: Fragment(), RepoCommitListener {
     private lateinit var repoWithCommitListViewModel: RepoWithCommitListViewModel
@@ -33,18 +34,20 @@ class RepoWithCommitListFragment: Fragment(), RepoCommitListener {
         repoListView.adapter = repoWithCommitListAdapter
 
         repoWithCommitListViewModel = (activity?.application as Application).serviceLocator.repoWithCommitListViewModel
-        repoWithCommitListViewModel.getRepoList(object : Result<List<RepoWithCommit>> {
-            override fun onSuccess(data: List<RepoWithCommit>) {
-                repoList.clear()
-                repoList.addAll(data as ArrayList<RepoWithCommit>)
-                repoWithCommitListAdapter.notifyDataSetChanged()
-            }
+        launch() {
+            repoWithCommitListViewModel.getRepoList(object : Result<List<RepoWithCommit>> {
+                override fun onSuccess(data: List<RepoWithCommit>) {
+                    repoList.clear()
+                    repoList.addAll(data as ArrayList<RepoWithCommit>)
+                    repoWithCommitListAdapter.notifyDataSetChanged()
+                }
 
-            override fun onFailure(error: Throwable) {
+                override fun onFailure(error: Throwable) {
 
-            }
+                }
 
-        }, this)
+            }, this@RepoWithCommitListFragment)
+        }
     }
 
     override fun onCommitLoaded(index: Int) {

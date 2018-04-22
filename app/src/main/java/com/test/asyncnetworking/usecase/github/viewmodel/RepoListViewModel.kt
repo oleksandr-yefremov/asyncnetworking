@@ -7,7 +7,7 @@ import com.test.asyncnetworking.usecase.github.repository.RepoRepository
 
 class RepoListViewModel(private val repoRepository: RepoRepository) {
 
-    fun getRepoList(result: Result<List<Repo>>) {
+    suspend fun getRepoList(result: Result<List<Repo>>) {
         return repoRepository.getRepos(object : Result<List<Repo>> {
             override fun onFailure(error: Throwable) {
                 result.onFailure(error)
