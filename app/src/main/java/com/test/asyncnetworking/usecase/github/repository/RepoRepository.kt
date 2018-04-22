@@ -71,7 +71,7 @@ class RepoRepository(private val repoApi: RepoApi, private val repoDao: RepoDao)
     private fun getReposFromDatabase(): Deferred<List<Repo>> {
         return async(CommonPool) {
             val repos = repoDao.getAll()
-//            Log.d(TAG, "getReposFromDatabase : ${repos.size} items")
+            Log.d(TAG, "getReposFromDatabase : ${repos.size} items")
             repos
         }
     }
