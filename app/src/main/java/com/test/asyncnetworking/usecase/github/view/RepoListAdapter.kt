@@ -14,7 +14,6 @@ class RepoListAdapter(context: Context, users: ArrayList<Repo>) : ArrayAdapter<R
     // TODO: implement ViewHolder
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         // Prepare convertView
-
         val convertView = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item_repo, parent, false)
 
         // Get the data item for this position
