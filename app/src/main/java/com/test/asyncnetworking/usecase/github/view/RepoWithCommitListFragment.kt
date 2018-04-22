@@ -13,6 +13,7 @@ import com.test.asyncnetworking.common.Result
 import com.test.asyncnetworking.usecase.github.data.RepoWithCommit
 import com.test.asyncnetworking.usecase.github.viewmodel.RepoCommitListener
 import com.test.asyncnetworking.usecase.github.viewmodel.RepoWithCommitListViewModel
+import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 
 class RepoWithCommitListFragment: Fragment(), RepoCommitListener {
@@ -34,7 +35,7 @@ class RepoWithCommitListFragment: Fragment(), RepoCommitListener {
         repoListView.adapter = repoWithCommitListAdapter
 
         repoWithCommitListViewModel = (activity?.application as Application).serviceLocator.repoWithCommitListViewModel
-        launch() {
+        launch(UI) {
             repoWithCommitListViewModel.getRepoList(object : Result<List<RepoWithCommit>> {
                 override fun onSuccess(data: List<RepoWithCommit>) {
                     repoList.clear()

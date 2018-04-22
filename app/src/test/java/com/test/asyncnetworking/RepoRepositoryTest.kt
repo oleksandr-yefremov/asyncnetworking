@@ -1,5 +1,6 @@
 package com.test.asyncnetworking
 
+import android.util.Log
 import com.nhaarman.mockito_kotlin.*
 import com.test.asyncnetworking.common.Result
 import com.test.asyncnetworking.usecase.github.api.RepoApi
@@ -9,12 +10,20 @@ import com.test.asyncnetworking.usecase.github.repository.RepoRepository
 import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.powermock.api.mockito.PowerMockito.mockStatic
+import org.powermock.core.classloader.annotations.PrepareForTest
+import org.powermock.modules.junit4.PowerMockRunner
 import retrofit2.mock.Calls
 import java.util.*
 
 /**
  *
  */
+@RunWith(PowerMockRunner::class)
+@PrepareForTest(
+    Log::class
+)
 class RepoRepositoryTest {
 
     private lateinit var repository: RepoRepository
@@ -25,6 +34,7 @@ class RepoRepositoryTest {
 
     @Before
     fun setup() {
+        mockStatic(Log::class.java)
         repoApi = mock()
         repoDao = mock()
         result = mock()

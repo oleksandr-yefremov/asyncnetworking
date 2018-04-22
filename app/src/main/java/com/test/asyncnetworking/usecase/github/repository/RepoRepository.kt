@@ -9,7 +9,6 @@ import com.test.asyncnetworking.usecase.github.model.Repo
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.yield
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.HttpException
@@ -19,20 +18,19 @@ import ru.gildor.coroutines.retrofit.awaitResponse
 class RepoRepository(private val repoApi: RepoApi, private val repoDao: RepoDao) {
 
     suspend fun getRepos(result: Result<List<Repo>>) {
-//        async {
-            val cachedData = getReposFromDatabase().await()
-//            Log.d(TAG, "async getReposFromDatabase() finished")
-            result.onSuccess(cachedData)
-//        }
+        val cachedData = getReposFromDatabase().await()
+        Log.d(TAG, "async getReposFromDatabase() finished")
+        result.onSuccess(cachedData)
 
-//        async(CommonPool) {
-            val response = repoApi.getRepos("token 2a16ab5720fea3c78c2ab5eb0545bb6d27c9fd4b","mralexgray", emptyMap()).awaitResponse()
+        Log.d(TAG, Thread.currentThread().name)
+        try {
+            val response = repoApi.getRepos("token 2a16ab5720fea3c78c2ab5eb0545bb6d27c9fd4b", "mralexgray", emptyMap()).awaitResponse()
             if (!response.isSuccessful) {
                 result.onFailure(HttpException(response))
-                yield()
+                return
             }
 
-//            Log.d(TAG, "repoApi.getRepos.onResponse")
+            Log.d(TAG, "repoApi.getRepos.onResponse")
             val data = response.body()
 
             if (data != null) {
@@ -41,13 +39,9 @@ class RepoRepository(private val repoApi: RepoApi, private val repoDao: RepoDao)
             } else {
                 result.onSuccess(emptyList())
             }
-//        }
-//    }
-
-//    override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
-//        Log.e(this.javaClass.simpleName, "API request failed")
-//        result.onFailure(t)
-//    }
+        } catch (error: Throwable) {
+            Log.d(TAG, "repoApi.getRepos.onResponse $error")
+        }
     }
 
     fun getRepoCommits(repoId: String, result: Result<List<Commit>>) {

@@ -11,6 +11,7 @@ import com.test.asyncnetworking.application.Application
 import com.test.asyncnetworking.common.Result
 import com.test.asyncnetworking.usecase.github.model.Repo
 import com.test.asyncnetworking.usecase.github.viewmodel.RepoListViewModel
+import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 
 class RepoListFragment: Fragment() {
@@ -34,7 +35,7 @@ class RepoListFragment: Fragment() {
         repoListAdapter.setNotifyOnChange(true)
         repoListView.adapter = repoListAdapter
 
-        launch() {
+        launch(UI) {
             repoListViewModel.getRepoList(object : Result<List<Repo>> {
                 override fun onSuccess(data: List<Repo>) {
                     repoListAdapter.clear()
