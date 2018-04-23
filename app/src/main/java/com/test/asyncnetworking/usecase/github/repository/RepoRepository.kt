@@ -29,7 +29,8 @@ class RepoRepository(private val repoApi: RepoApi, private val repoDao: RepoDao)
         Log.d(TAG, Thread.currentThread().name)
 
         try {
-            val response = repoApi.getRepos("token 2a16ab5720fea3c78c2ab5eb0545bb6d27c9fd4b", "mralexgray", emptyMap()).awaitResponse()
+            // put "token <your-oauth-token>" instead of empty string to bypass API rate limits
+            val response = repoApi.getRepos("", "mralexgray", emptyMap()).awaitResponse()
             if (!response.isSuccessful) {
                 result.onFailure(HttpException(response))
                 return
@@ -51,7 +52,8 @@ class RepoRepository(private val repoApi: RepoApi, private val repoDao: RepoDao)
     }
 
     fun getRepoCommits(repoId: String, result: Result<List<Commit>>) {
-        repoApi.getRepoLastCommit("token 2a16ab5720fea3c78c2ab5eb0545bb6d27c9fd4b", "mralexgray", repoId, emptyMap())
+        // put "token <your-oauth-token>" instead of empty string to bypass API rate limits
+        repoApi.getRepoLastCommit("", "mralexgray", repoId, emptyMap())
                 .enqueue(object : Callback<List<Commit>> {
                     override fun onResponse(call: Call<List<Commit>>, response: Response<List<Commit>>) {
                         if (!response.isSuccessful) {

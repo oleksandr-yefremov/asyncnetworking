@@ -45,7 +45,7 @@ class RepoWithCommitListViewModel(private val repoRepository: RepoRepository, pr
                             }
 
                             override fun onFailure(error: Throwable) {
-                                Log.d(TAG, "repoViewModel.getLastCommit failed", error)
+                                Log.e(TAG, "repoViewModel.getLastCommit failed", error)
                             }
                         })
                     }
