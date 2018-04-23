@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.test.asyncnetworking.R
-import com.test.asyncnetworking.usecase.github.data.RepoWithCommit
+import com.test.asyncnetworking.usecase.github.model.RepoWithCommit
 
+/**
+ * Adapts list of repositories with commits data to ListView presentation
+ */
 class RepoWithCommitListAdapter(context: Context, repos: ArrayList<RepoWithCommit>) : ArrayAdapter<RepoWithCommit>(context, 0, repos) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -21,7 +24,7 @@ class RepoWithCommitListAdapter(context: Context, repos: ArrayList<RepoWithCommi
         // Check if an existing view is being reused, otherwise inflate the view
         // Lookup view for data population
         val repoNameText = convertView.findViewById<TextView>(R.id.repoNameText)
-        val commitShaText = convertView.findViewById<TextView>(R.id.commitShaText)
+        val commitShaText = convertView.findViewById<TextView>(R.id.additionalInfoText)
 
         // Populate the data into the template view using the data object
         repoNameText.text = repo.repo.name

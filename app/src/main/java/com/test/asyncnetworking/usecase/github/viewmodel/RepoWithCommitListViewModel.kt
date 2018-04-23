@@ -3,11 +3,15 @@ package com.test.asyncnetworking.usecase.github.viewmodel
 import android.util.Log
 import com.test.asyncnetworking.common.CachedResult
 import com.test.asyncnetworking.common.Result
-import com.test.asyncnetworking.usecase.github.data.RepoWithCommit
 import com.test.asyncnetworking.usecase.github.model.Commit
 import com.test.asyncnetworking.usecase.github.model.Repo
+import com.test.asyncnetworking.usecase.github.model.RepoWithCommit
 import com.test.asyncnetworking.usecase.github.repository.RepoRepository
 
+/**
+ * Mediates communication between View and Repository for use case of
+ * list of repos with commit being loaded asynchronously.
+ */
 class RepoWithCommitListViewModel(private val repoRepository: RepoRepository, private val repoListViewModel: RepoListViewModel) {
 
     lateinit var repoViewModelList: ArrayList<RepoViewModel>

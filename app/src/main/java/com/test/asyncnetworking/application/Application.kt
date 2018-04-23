@@ -12,6 +12,8 @@ import com.test.asyncnetworking.usecase.github.viewmodel.RepoWithCommitListViewM
 
 class Application : Application() {
 
+    // Simplest form of manual DI.
+    // Note: this field may not be static, because then Context will leak.
     lateinit var serviceLocator: ServiceLocator
 
     override fun onCreate() {
@@ -20,8 +22,6 @@ class Application : Application() {
         serviceLocator = ServiceLocator(applicationContext)
     }
 
-    // Simplest form of manual DI.
-    // Note: this class may not be static, because then context will leak.
     class ServiceLocator(private val applicationContext: Context) {
 
         private val appDatabase: AppDatabase by lazy {

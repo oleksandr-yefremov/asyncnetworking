@@ -10,12 +10,16 @@ import android.widget.ListView
 import com.test.asyncnetworking.R
 import com.test.asyncnetworking.application.Application
 import com.test.asyncnetworking.common.Result
-import com.test.asyncnetworking.usecase.github.data.RepoWithCommit
+import com.test.asyncnetworking.usecase.github.model.RepoWithCommit
 import com.test.asyncnetworking.usecase.github.viewmodel.RepoCommitListener
 import com.test.asyncnetworking.usecase.github.viewmodel.RepoWithCommitListViewModel
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 
+/**
+ * Displays ListView fetching UI data from ViewModel.
+ * Gets notified when a commit for every repo is loaded and ListView can be updated.
+ */
 class RepoWithCommitListFragment: Fragment(), RepoCommitListener {
     private lateinit var repoWithCommitListViewModel: RepoWithCommitListViewModel
     private lateinit var repoListView: ListView

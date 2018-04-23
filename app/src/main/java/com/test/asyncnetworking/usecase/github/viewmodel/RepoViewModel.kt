@@ -6,6 +6,9 @@ import com.test.asyncnetworking.usecase.github.model.Commit
 import com.test.asyncnetworking.usecase.github.model.Repo
 import com.test.asyncnetworking.usecase.github.repository.RepoRepository
 
+/**
+ * Mediates communication between View and Repository for a single repo use case.
+ */
 class RepoViewModel(private val repoRepository: RepoRepository, val repo: Repo) {
 
     fun getLastCommit(result: Result<Commit?>) {

@@ -5,6 +5,9 @@ import com.test.asyncnetworking.common.CachedResult
 import com.test.asyncnetworking.usecase.github.model.Repo
 import com.test.asyncnetworking.usecase.github.repository.RepoRepository
 
+/**
+ * Mediates communication between View and Repository for list of repos use case.
+ */
 class RepoListViewModel(private val repoRepository: RepoRepository) {
 
     suspend fun getRepoList(result: CachedResult<List<Repo>>) {

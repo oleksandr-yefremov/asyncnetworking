@@ -6,6 +6,9 @@ import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.test.asyncnetworking.usecase.github.model.Repo
 
+/**
+ * DAO for Repository connected to Room DB
+ */
 @Dao
 interface RepoDao {
 

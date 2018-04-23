@@ -16,6 +16,9 @@ import retrofit2.HttpException
 import retrofit2.Response
 import ru.gildor.coroutines.retrofit.awaitResponse
 
+/**
+ * Business logic for data manipulation. Encapsulates handling DB, API requests, caching etc.
+ */
 class RepoRepository(private val repoApi: RepoApi, private val repoDao: RepoDao) {
 
     suspend fun getRepos(result: CachedResult<List<Repo>>) {
@@ -24,6 +27,7 @@ class RepoRepository(private val repoApi: RepoApi, private val repoDao: RepoDao)
         result.onSuccess(cachedData, isCache = true)
 
         Log.d(TAG, Thread.currentThread().name)
+
         try {
             val response = repoApi.getRepos("token 2a16ab5720fea3c78c2ab5eb0545bb6d27c9fd4b", "mralexgray", emptyMap()).awaitResponse()
             if (!response.isSuccessful) {

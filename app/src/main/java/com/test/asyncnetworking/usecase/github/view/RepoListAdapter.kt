@@ -9,6 +9,9 @@ import android.widget.TextView
 import com.test.asyncnetworking.R
 import com.test.asyncnetworking.usecase.github.model.Repo
 
+/**
+ * Adapts list of repositories data to ListView presentation
+ */
 class RepoListAdapter(context: Context) : ArrayAdapter<Repo>(context, 0) {
 
     // TODO: implement ViewHolder
@@ -22,7 +25,7 @@ class RepoListAdapter(context: Context) : ArrayAdapter<Repo>(context, 0) {
         // Check if an existing view is being reused, otherwise inflate the view
         // Lookup view for data population
         val repoNameText = convertView.findViewById<TextView>(R.id.repoNameText)
-        val numLikesText = convertView.findViewById<TextView>(R.id.commitShaText)
+        val numLikesText = convertView.findViewById<TextView>(R.id.additionalInfoText)
 
         // Populate the data into the template view using the data object
         repoNameText.text = repo.name

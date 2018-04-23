@@ -16,7 +16,7 @@
         />
 
     <TextView
-        android:id="@+id/commitShaText"
+        android:id="@+id/additionalInfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
