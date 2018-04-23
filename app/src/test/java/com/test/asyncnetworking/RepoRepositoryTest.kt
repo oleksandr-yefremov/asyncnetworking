@@ -2,7 +2,7 @@ package com.test.asyncnetworking
 
 import android.util.Log
 import com.nhaarman.mockito_kotlin.*
-import com.test.asyncnetworking.common.Result
+import com.test.asyncnetworking.common.CachedResult
 import com.test.asyncnetworking.usecase.github.api.RepoApi
 import com.test.asyncnetworking.usecase.github.db.RepoDao
 import com.test.asyncnetworking.usecase.github.model.Repo
@@ -17,9 +17,6 @@ import org.powermock.modules.junit4.PowerMockRunner
 import retrofit2.mock.Calls
 import java.util.*
 
-/**
- *
- */
 @RunWith(PowerMockRunner::class)
 @PrepareForTest(
     Log::class
@@ -29,7 +26,7 @@ class RepoRepositoryTest {
     private lateinit var repository: RepoRepository
     private lateinit var repoApi: RepoApi
     private lateinit var repoDao: RepoDao
-    private lateinit var result : Result<List<Repo>>
+    private lateinit var result : CachedResult<List<Repo>>
     private val emptyList = ArrayList<Repo>()
 
     @Before
@@ -54,7 +51,8 @@ class RepoRepositoryTest {
 
         // THEN
         verify(result, never()).onFailure(any())
-        verify(result, times(2)).onSuccess(emptyList())
+        verify(result, times(1)).onSuccess(emptyList(), true)
+        verify(result, times(1)).onSuccess(emptyList(), false)
     }
 
     @Test
@@ -71,8 +69,8 @@ class RepoRepositoryTest {
 
         // THEN
         verify(result, never()).onFailure(any())
-        verify(result, times(1)).onSuccess(emptyList())
-        verify(result, times(1)).onSuccess(expectedList)
+        verify(result, times(1)).onSuccess(emptyList(), true)
+        verify(result, times(1)).onSuccess(expectedList, false)
     }
 
     @Test
@@ -90,8 +88,8 @@ class RepoRepositoryTest {
 
         // THEN
         verify(result, never()).onFailure(any())
-        verify(result, times(1)).onSuccess(expectedCacheList)
-        verify(result, times(1)).onSuccess(expectedApiList)
+        verify(result, times(1)).onSuccess(expectedCacheList, true)
+        verify(result, times(1)).onSuccess(expectedApiList, false)
     }
 
     @Test
